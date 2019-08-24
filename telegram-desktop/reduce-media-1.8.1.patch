@@ -1,0 +1,20 @@
+--- a/Telegram/SourceFiles/history/history.style
++++ b/Telegram/SourceFiles/history/history.style
+@@ -11,13 +11,13 @@ using "ui/widgets/widgets.style";
+ 
+ minPhotoSize: 100px;
+ minVideoSize: 160px;
+-maxMediaSize: 430px;
++maxMediaSize: 220px;
+ maxStickerSize: 256px;
+-maxGifSize: 320px;
+-maxVideoMessageSize: 240px;
++maxGifSize: 160px;
++maxVideoMessageSize: 160px;
+ maxSignatureSize: 144px;
+ maxWallPaperWidth: 160px;
+-maxWallPaperHeight: 240px;
++maxWallPaperHeight: 160px;
+ 
+ historyMinimalWidth: 380px;
+ 

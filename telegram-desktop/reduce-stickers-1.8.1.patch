@@ -1,0 +1,21 @@
+--- a/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp
++++ b/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp
+@@ -58,14 +58,14 @@ QSize Sticker::size() {
+ 	if (isEmojiSticker()) {
+ 		constexpr auto kIdealStickerSize = 512;
+ 		const auto zoom = GetEmojiStickerZoom(&_document->session());
+-		const auto convert = [&](int size) {
+-			return int(size * st::maxStickerSize * zoom / kIdealStickerSize);
++		const auto convert = [&](int size, int f) {
++			return int(size * st::maxStickerSize / f * zoom / kIdealStickerSize);
+ 		};
+-		_size = QSize(convert(_size.width()), convert(_size.height()));
++		_size = QSize(convert(_size.width(), 1), convert(_size.height(), 2));
+ 	} else {
+ 		_size = DownscaledSize(
+ 			_size,
+-			{ st::maxStickerSize, st::maxStickerSize });
++			{ st::maxStickerSize, st::maxStickerSize / 2 });
+ 	}
+ 	return _size;
+ }

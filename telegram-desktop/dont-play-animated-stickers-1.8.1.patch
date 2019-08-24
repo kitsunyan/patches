@@ -1,0 +1,10 @@
+--- a/Telegram/SourceFiles/lottie/lottie_frame_renderer.cpp
++++ b/Telegram/SourceFiles/lottie/lottie_frame_renderer.cpp
+@@ -372,6 +372,7 @@ void SharedState::renderNextFrame(
+ 
+ auto SharedState::renderNextFrame(const FrameRequest &request)
+ -> RenderResult {
++	return { false };
+ 	const auto prerender = [&](int index) -> RenderResult {
+ 		const auto frame = getFrame(index);
+ 		const auto next = getFrame((index + 1) % kFramesCount);

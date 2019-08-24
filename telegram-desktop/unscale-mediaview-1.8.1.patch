@@ -1,0 +1,11 @@
+--- a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
++++ b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
+@@ -48,6 +48,8 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include "styles/style_mediaview.h"
+ #include "styles/style_history.h"
+ 
++#define ConvertScale(x) (cScale() > 100 ? ConvertScale(x) : (x))
++
+ namespace Media {
+ namespace View {
+ namespace {
