@@ -1,0 +1,59 @@
+diff --git a/daemon/gvfsbackend.c b/daemon/gvfsbackend.c
+index 4fd3455..9a1be78 100644
+--- a/daemon/gvfsbackend.c
++++ b/daemon/gvfsbackend.c
+@@ -40,7 +40,6 @@
+ #include <gvfsjobsetdisplayname.h>
+ #include <gvfsjobenumerate.h>
+ #include <gvfsjobdelete.h>
+-#include <gvfsjobtrash.h>
+ #include <gvfsjobunmount.h>
+ #include <gvfsjobmountmountable.h>
+ #include <gvfsjobunmountmountable.h>
+@@ -264,7 +263,6 @@ register_path_cb (GDBusConnection *conn,
+   g_signal_connect (skeleton, "handle-query-filesystem-info", G_CALLBACK (g_vfs_job_query_fs_info_new_handle), data);
+   g_signal_connect (skeleton, "handle-set-display-name", G_CALLBACK (g_vfs_job_set_display_name_new_handle), data);
+   g_signal_connect (skeleton, "handle-delete", G_CALLBACK (g_vfs_job_delete_new_handle), data);
+-  g_signal_connect (skeleton, "handle-trash", G_CALLBACK (g_vfs_job_trash_new_handle), data);
+   g_signal_connect (skeleton, "handle-make-directory", G_CALLBACK (g_vfs_job_make_directory_new_handle), data);
+   g_signal_connect (skeleton, "handle-make-symbolic-link", G_CALLBACK (g_vfs_job_make_symlink_new_handle), data);
+   g_signal_connect (skeleton, "handle-query-settable-attributes", G_CALLBACK (g_vfs_job_query_settable_attributes_new_handle), data);
+diff --git a/daemon/meson.build b/daemon/meson.build
+index 7f2608b..1c63ad0 100644
+--- a/daemon/meson.build
++++ b/daemon/meson.build
+@@ -1,5 +1,3 @@
+-subdir('trashlib')
+-
+ # D-Bus and systemd service files
+ dbus_service = gvfs_namespace + '.Daemon'
+ dbus_exec = 'gvfsd'
+@@ -84,7 +82,6 @@ sources = files(
+   'gvfsjobsource.c',
+   'gvfsjobstartmountable.c',
+   'gvfsjobstopmountable.c',
+-  'gvfsjobtrash.c',
+   'gvfsjobtruncate.c',
+   'gvfsjobunmount.c',
+   'gvfsjobunmountmountable.c',
+@@ -186,20 +183,6 @@ cflags = [
+ programs += [['gvfsd-ftp', sources, [], cflags]]
+ mounts += ['ftp', 'ftps', 'ftpis']
+ 
+-sources = files('gvfsbackendtrash.c')
+-
+-deps = [libtrash_dep]
+-
+-cflags = [
+-  '-DBACKEND_HEADER=gvfsbackendtrash.h',
+-  '-DDEFAULT_BACKEND_TYPE=trash',
+-  '-DBACKEND_TYPES="trash", G_VFS_TYPE_BACKEND_TRASH,',
+-  '-DMAX_JOB_THREADS=10'
+-]
+-
+-programs += [['gvfsd-trash', sources, deps, cflags]]
+-mounts += ['trash']
+-
+ sources = files('gvfsbackendrecent.c')
+ 
+ cflags = [
