@@ -1,0 +1,62 @@
+diff --git a/gen_compile.sh b/gen_compile.sh
+index c287054..a02d863 100755
+--- a/gen_compile.sh
++++ b/gen_compile.sh
+@@ -379,17 +379,13 @@ compile_kernel() {
+ 	then
+ 		copy_image_with_preserve "kernel" \
+ 			"${tmp_kernel_binary}" \
+-			"kernel-${KNAME}-${ARCH}-${KV}"
+-
+-		copy_image_with_preserve "System.map" \
+-			"${systemmap}" \
+-			"System.map-${KNAME}-${ARCH}-${KV}"
++			"kernel-${KNAME}"
+ 
+ 		if isTrue "${GENZIMAGE}"
+ 		then
+ 			copy_image_with_preserve "kernelz" \
+ 				"${tmp_kernel_binary2}" \
+-				"kernelz-${KV}"
++				"kernelz-${KNAME}"
+ 		fi
+ 	else
+ 		cp "${tmp_kernel_binary}" "${TMPDIR}/kernel-${KNAME}-${ARCH}-${KV}" ||
+diff --git a/gen_initramfs.sh b/gen_initramfs.sh
+index d4f56db..c9ab990 100755
+--- a/gen_initramfs.sh
++++ b/gen_initramfs.sh
+@@ -1200,7 +1200,7 @@ create_initramfs() {
+ 		then
+ 			copy_image_with_preserve "initramfs" \
+ 				"${TMPDIR}/initramfs-${KV}" \
+-				"initramfs-${KNAME}-${ARCH}-${KV}"
++				"initramfs-${KNAME}"
+ 		fi
+ 	fi
+ }
+diff --git a/gen_package.sh b/gen_package.sh
+index d82322f..30e3a3f 100755
+--- a/gen_package.sh
++++ b/gen_package.sh
+@@ -126,18 +126,14 @@ gen_kerncache_extract_kernel()
+ 	/bin/tar -xf ${KERNCACHE} -C ${TEMP}
+ 	copy_image_with_preserve "kernel" \
+ 		"${TEMP}/kernel-${ARCH}-${KV}" \
+-		"kernel-${KNAME}-${ARCH}-${KV}"
++		"kernel-${KNAME}"
+ 
+ 	if isTrue "${GENZIMAGE}"
+ 	then
+ 		copy_image_with_preserve "kernelz" \
+ 			"${TEMP}/kernelz-${ARCH}-${KV}" \
+-			"kernelz-${KNAME}-${ARCH}-${KV}"
++			"kernelz-${KNAME}"
+ 	fi
+-
+-	copy_image_with_preserve "System.map" \
+-		"${TEMP}/System.map-${ARCH}-${KV}" \
+-		"System.map-${KNAME}-${ARCH}-${KV}"
+ }
+ 
+ gen_kerncache_extract_modules()
