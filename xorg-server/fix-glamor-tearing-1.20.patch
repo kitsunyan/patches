@@ -1,0 +1,11 @@
+--- a/glamor/glamor_egl.c
++++ b/glamor/glamor_egl.c
+@@ -353,7 +353,7 @@
+     struct glamor_pixmap_private *pixmap_priv =
+         glamor_get_pixmap_private(pixmap);
+ 
+-    if (!pixmap_priv->image)
++    if (!glamor_make_pixmap_exportable(pixmap, FALSE))
+         return NULL;
+ 
+     return gbm_bo_import(glamor_egl->gbm, GBM_BO_IMPORT_EGL_IMAGE,
