@@ -15,6 +15,6 @@
  maxWallPaperWidth: 160px;
 -maxWallPaperHeight: 240px;
 +maxWallPaperHeight: 160px;
+ historyThemeSize: size(272px, 176px);
  
  historyMinimalWidth: 380px;
- 
