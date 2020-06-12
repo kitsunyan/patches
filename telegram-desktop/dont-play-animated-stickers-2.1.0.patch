@@ -1,6 +1,6 @@
---- a/Telegram/SourceFiles/lottie/lottie_frame_renderer.cpp
-+++ b/Telegram/SourceFiles/lottie/lottie_frame_renderer.cpp
-@@ -372,6 +372,7 @@ void SharedState::renderNextFrame(
+--- a/Telegram/lib_lottie/lottie/lottie_frame_renderer.cpp
++++ b/Telegram/lib_lottie/lottie/lottie_frame_renderer.cpp
+@@ -413,6 +413,7 @@ void SharedState::renderNextFrame(
  
  auto SharedState::renderNextFrame(const FrameRequest &request)
  -> RenderResult {

@@ -6,7 +6,7 @@
  minVideoSize: 160px;
 -maxMediaSize: 430px;
 +maxMediaSize: 220px;
- maxStickerSize: 256px;
+ maxStickerSize: 228px;
 -maxGifSize: 320px;
 -maxVideoMessageSize: 240px;
 +maxGifSize: 160px;

@@ -1,0 +1,21 @@
+diff --git a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
+index b44f0e538..3785cfd5b 100644
+--- a/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
++++ b/Telegram/SourceFiles/media/view/media_view_overlay_widget.cpp
+@@ -65,6 +65,16 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
+ #include <QtGui/QWindow>
+ #include <QtGui/QScreen>
+ 
++namespace style {
++	template <typename T>
++	[[nodiscard]] static inline T ConvertScaleChecked(T value) {
++		int scale = Scale();
++		return scale > 100 ? ConvertScale(value) : value;
++	}
++}
++
++#define ConvertScale(x) ConvertScaleChecked(x)
++
+ namespace Media {
+ namespace View {
+ namespace {
