@@ -1,0 +1,37 @@
+--- a/timidity/playmidi.c
++++ b/timidity/playmidi.c
+@@ -215,7 +215,7 @@
+ int32 opt_drum_power = 100;		/* coef. of drum amplitude */
+ int opt_amp_compensation = 0;
+ int opt_modulation_envelope = 0;
+-int opt_pan_delay = 0;	/* phase difference between left ear and right ear. */
++int opt_pan_delay = 1;	/* phase difference between left ear and right ear. */
+ int opt_user_volume_curve = 0;
+ int opt_default_module = MODULE_TIMIDITY_DEFAULT;
+ int opt_preserve_silence = 0;
+@@ -2270,22 +2270,10 @@
+ 		vp->pan_delay_buf = NULL;
+ 	}
+ 	vp->pan_delay_rpt = 0;
+-	if (opt_pan_delay && channel[ch].insertion_effect == 0 && !opt_surround_chorus) {
+-		if (vp->panning == 64) {vp->delay += pan_delay_table[64] * play_mode->rate / 1000;}
+-		else {
+-			if(pan_delay_table[vp->panning] > pan_delay_table[127 - vp->panning]) {
+-				pan_delay_diff = pan_delay_table[vp->panning] - pan_delay_table[127 - vp->panning];
+-				vp->delay += (pan_delay_table[vp->panning] - pan_delay_diff) * play_mode->rate / 1000;
+-			} else {
+-				pan_delay_diff = pan_delay_table[127 - vp->panning] - pan_delay_table[vp->panning];
+-				vp->delay += (pan_delay_table[127 - vp->panning] - pan_delay_diff) * play_mode->rate / 1000;
+-			}
+-			vp->pan_delay_rpt = pan_delay_diff * play_mode->rate / 1000;
+-		}
+-		if(vp->pan_delay_rpt < 1) {vp->pan_delay_rpt = 0;}
++	if (opt_pan_delay && channel[ch].insertion_effect == 0 && !opt_surround_chorus && ch != 9) {
++		vp->delay += pan_delay_table[vp->panning] * play_mode->rate / 100;
+ 		vp->pan_delay_wpt = 0;
+-		vp->pan_delay_spt = vp->pan_delay_wpt - vp->pan_delay_rpt;
+-		if (vp->pan_delay_spt < 0) {vp->pan_delay_spt += PAN_DELAY_BUF_MAX;}
++		vp->pan_delay_spt = 0;
+ 		vp->pan_delay_buf = (int32 *)safe_malloc(sizeof(int32) * PAN_DELAY_BUF_MAX);
+ 		memset(vp->pan_delay_buf, 0, sizeof(int32) * PAN_DELAY_BUF_MAX);
+ 	}
