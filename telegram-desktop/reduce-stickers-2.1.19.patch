@@ -1,8 +1,8 @@
 diff --git a/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp b/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp
-index 56e913809..e51c09c94 100644
+index 68df01812..f1df86451 100644
 --- a/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp
 +++ b/Telegram/SourceFiles/history/view/media/history_view_sticker.cpp
-@@ -79,7 +79,7 @@ void Sticker::initSize() {
+@@ -104,7 +104,7 @@ void Sticker::initSize() {
  	} else {
  		_size = DownscaledSize(
  			_size,
@@ -11,14 +11,14 @@ index 56e913809..e51c09c94 100644
  	}
  }
  
-@@ -114,10 +114,10 @@ QSize Sticker::GetAnimatedEmojiSize(
+@@ -141,10 +141,10 @@ QSize Sticker::GetAnimatedEmojiSize(
+ 		not_null<Main::Session*> session,
  		QSize documentSize) {
- 	constexpr auto kIdealStickerSize = 512;
  	const auto zoom = GetEmojiStickerZoom(session);
 -	const auto convert = [&](int size) {
--		return int(size * st::maxStickerSize * zoom / kIdealStickerSize);
+-		return int(size * st::maxStickerSize * zoom / kStickerSideSize);
 +	const auto convert = [&](int size, int f) {
-+		return int(size * st::maxStickerSize / f * zoom / kIdealStickerSize);
++		return int(size * st::maxStickerSize / f * zoom / kStickerSideSize);
  	};
 -	return { convert(documentSize.width()), convert(documentSize.height()) };
 +	return { convert(documentSize.width(), 1), convert(documentSize.height(), 2) };

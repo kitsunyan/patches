@@ -1,6 +1,8 @@
---- a/Telegram/SourceFiles/history/history.style
-+++ b/Telegram/SourceFiles/history/history.style
-@@ -11,13 +11,13 @@ using "ui/widgets/widgets.style";
+diff --git a/Telegram/SourceFiles/ui/chat/chat.style b/Telegram/SourceFiles/ui/chat/chat.style
+index 4364fca61..183f967bb 100644
+--- a/Telegram/SourceFiles/ui/chat/chat.style
++++ b/Telegram/SourceFiles/ui/chat/chat.style
+@@ -29,13 +29,13 @@ defaultMessageBar: MessageBar {
  
  minPhotoSize: 100px;
  minVideoSize: 160px;
